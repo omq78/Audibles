@@ -15,7 +15,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cvLayout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         cvLayout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: cvLayout)
-        cv.backgroundColor = UIColor.white
+        cv.backgroundColor = .white
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.delegate = self
         cv.dataSource = self
@@ -33,20 +33,68 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     
+    
+    let pageControl: UIPageControl = {
+       let pc = UIPageControl()
+        pc.pageIndicatorTintColor = .lightGray
+        pc.currentPageIndicatorTintColor = UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1)
+        pc.numberOfPages = 3
+        pc.translatesAutoresizingMaskIntoConstraints = false
+        return pc
+    }()
+    
+    let skipButton: UIButton = {
+    let button = UIButton(type: .system)
+        button.setTitle("Skip", for: .normal)
+        button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+
+    let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupComponents()
+    }
+
+
+    func setupComponents() {
         view.addSubview(collectionView)
-//        collectionView.frame = self.view.frame
-//        set constraints instead
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        // Do any additional setup after loading the view.
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellID)
+        
+        view.addSubview(pageControl)
+        pageControl.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+        pageControl.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        pageControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        view.addSubview(skipButton)
+        skipButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        skipButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32).isActive = true
+        skipButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        skipButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+
+        view.addSubview(nextButton)
+        nextButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        nextButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32).isActive = true
+        nextButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
-
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pages.count
     }

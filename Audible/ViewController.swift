@@ -25,6 +25,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     let cellID = "CellID"
     
+    let pages: [Page] = {
+        let page1 = Page(imageName: "page1", title: "Share a great listen", message: "It's free to send your books to the people in your life. Every recipient's first book is no us.")
+        let page2 = Page(imageName: "page2", title: "Send from your library", message: "Tap the More menu next to any book. Choose \"Send this book\"")
+        let page3 = Page(imageName: "page3", title: "Send from the player", message: "Tap the More menu in the upper corner. Choose \"Send this Book\"")
+         return [page1, page2, page3]
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
@@ -40,14 +48,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return pages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? PageCell
      
-        cell.backgroundColor = .blue
-        return cell
+        cell!.page = pages[indexPath.item]
+        
+        return cell!
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

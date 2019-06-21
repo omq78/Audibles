@@ -24,6 +24,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     let cellID = "CellID"
+    let loginPageCellID = "loginPageCellID"
     
     let pages: [Page] = {
         let page1 = Page(imageName: "page1", title: "Share a great listen", message: "It's free to send your books to the people in your life. Every recipient's first book is no us.")
@@ -34,11 +35,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     
-    let pageControl: UIPageControl = {
+    lazy var pageControl: UIPageControl = {
        let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
         pc.currentPageIndicatorTintColor = UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1)
-        pc.numberOfPages = 3
+        pc.numberOfPages = self.pages.count + 1
         pc.translatesAutoresizingMaskIntoConstraints = false
         return pc
     }()
@@ -63,45 +64,60 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         setupComponents()
+        registerCells()
     }
 
+    private func registerCells(){
+        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: loginPageCellID)
+    }
 
+    var pageControlBottomAnchor: NSLayoutConstraint?
+    var skipButtonTopAnchor: NSLayoutConstraint?
+    var nextButtonTopAnchor: NSLayoutConstraint?
+    
     func setupComponents() {
         view.addSubview(collectionView)
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellID)
         
         view.addSubview(pageControl)
         pageControl.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16).isActive = true
+        pageControlBottomAnchor = pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16)
+        pageControlBottomAnchor?.isActive = true
         pageControl.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         pageControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         view.addSubview(skipButton)
         skipButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        skipButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32).isActive = true
+        skipButtonTopAnchor = skipButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32)
+        skipButtonTopAnchor?.isActive = true
         skipButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
         skipButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
 
         view.addSubview(nextButton)
         nextButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        nextButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32).isActive = true
+        nextButtonTopAnchor = nextButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 32)
+        nextButtonTopAnchor?.isActive = true
         nextButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pages.count
+        return pages.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+     
+        if indexPath.row == self.pages.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: loginPageCellID, for: indexPath)
+            return cell
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? PageCell
      
         cell!.page = pages[indexPath.item]
@@ -109,6 +125,24 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell!
     }
     
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
+        pageControl.currentPage = pageNumber
+        
+        if pageNumber == self.pages.count {
+            pageControlBottomAnchor?.constant = 40
+            skipButtonTopAnchor?.constant = -40
+            nextButtonTopAnchor?.constant = -40
+        } else {
+            pageControlBottomAnchor?.constant = -16
+            skipButtonTopAnchor?.constant = 32
+            nextButtonTopAnchor?.constant = 32
+        }
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width, height: self.view.frame.height)
     }

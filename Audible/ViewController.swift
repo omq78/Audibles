@@ -65,16 +65,41 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         setupComponents()
         registerCells()
+        
+        observeKeyboardNotifications()
     }
-
+    
+    
+    private func observeKeyboardNotifications(){
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification , object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    
+    @objc func keyboardShow(){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
+    }
+    
+    @objc func keyboardHide(){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
+    }
+    
+    
     private func registerCells(){
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: loginPageCellID)
+        collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginPageCellID)
     }
 
     var pageControlBottomAnchor: NSLayoutConstraint?
     var skipButtonTopAnchor: NSLayoutConstraint?
     var nextButtonTopAnchor: NSLayoutConstraint?
+    
     
     func setupComponents() {
         view.addSubview(collectionView)
@@ -115,8 +140,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
      
         if indexPath.row == self.pages.count {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: loginPageCellID, for: indexPath)
-            return cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: loginPageCellID, for: indexPath) as? LoginCell
+            
+            return cell!
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? PageCell
      
@@ -126,6 +152,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
 
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        view.endEditing(true)
+    }
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
         pageControl.currentPage = pageNumber

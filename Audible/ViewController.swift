@@ -44,23 +44,46 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return pc
     }()
     
-    let skipButton: UIButton = {
-    let button = UIButton(type: .system)
+    lazy var skipButton: UIButton = {
+        let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
         button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(skipPages), for: .touchUpInside)
         return button
     }()
     
 
-    let nextButton: UIButton = {
+    lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
         button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(nextPage), for: .touchUpInside)
         return button
     }()
 
+    
+    @objc func skipPages(){
+        pageControl.currentPage = pages.count - 1
+        nextPage()
+    }
+    
+    @objc func nextPage(){
+        var page: Int = pageControl.currentPage
+        if page >= pages.count {
+            return
+        } else {
+            page += 1
+            let indexPath = IndexPath(item: page, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            pageControl.currentPage = page
+            if page == pages.count {
+                lastPageView()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupComponents()
@@ -161,18 +184,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         pageControl.currentPage = pageNumber
         
         if pageNumber == self.pages.count {
-            pageControlBottomAnchor?.constant = 40
-            skipButtonTopAnchor?.constant = -40
-            nextButtonTopAnchor?.constant = -40
+            lastPageView()
         } else {
             pageControlBottomAnchor?.constant = -16
             skipButtonTopAnchor?.constant = 32
             nextButtonTopAnchor?.constant = 32
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
         }
+    }
+    
+    func lastPageView(){
+        pageControlBottomAnchor?.constant = 40
+        skipButtonTopAnchor?.constant = -40
+        nextButtonTopAnchor?.constant = -40
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width, height: self.view.frame.height)
     }

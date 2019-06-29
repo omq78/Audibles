@@ -63,6 +63,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return button
     }()
 
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(at: IndexPath(row: self.pageControl.currentPage, section: 0), at: .centeredHorizontally, animated: true)
+            self.collectionView.reloadData()
+        }
+    }
     
     @objc func skipPages(){
         pageControl.currentPage = pages.count - 1
@@ -103,7 +110,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @objc func keyboardShow(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height)
+            let viewHeight: CGFloat = UIDevice.current.orientation.isLandscape ? -120 : -50
+            
+            self.view.frame = CGRect(x: 0, y: viewHeight, width: self.view.frame.width, height: self.view.frame.height)
         }, completion: nil)
     }
     

@@ -20,7 +20,10 @@ class PageCell: UICollectionViewCell {
             guard let page = page else {
                 return
             }
-            pageImageView.image = UIImage(named: page.imageName)
+            
+            let imageName = UIDevice.current.orientation.isLandscape ? page.imageName + "_landscape" : page.imageName
+            
+            pageImageView.image = UIImage(named: imageName)
 //            pageTextView.text = "\(page.title)\n\n\(page.message)"
             let fontColor = UIColor(white: 0.2, alpha: 1)
             let attributedText = NSMutableAttributedString(string: page.title, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .medium), NSAttributedString.Key.foregroundColor: fontColor])

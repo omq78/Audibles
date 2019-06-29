@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3218158622B6E1F3009A51D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218158522B6E1F3009A51D4 /* AppDelegate.swift */; };
-		3218158822B6E1F3009A51D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218158722B6E1F3009A51D4 /* ViewController.swift */; };
+		3218158822B6E1F3009A51D4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218158722B6E1F3009A51D4 /* LoginController.swift */; };
 		3218158B22B6E1F3009A51D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3218158922B6E1F3009A51D4 /* Main.storyboard */; };
 		3218158E22B6E1F3009A51D4 /* Audible.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3218158C22B6E1F3009A51D4 /* Audible.xcdatamodeld */; };
 		3218159022B6E1F5009A51D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3218158F22B6E1F5009A51D4 /* Assets.xcassets */; };
@@ -16,12 +16,13 @@
 		3218159B22B845A4009A51D4 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218159A22B845A4009A51D4 /* PageCell.swift */; };
 		3218159D22BC1BB8009A51D4 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218159C22BC1BB8009A51D4 /* Page.swift */; };
 		32D08A6022C618C900749FA9 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D08A5F22C618C900749FA9 /* LoginCell.swift */; };
+		32D08A6222C7F18600749FA9 /* MianNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D08A6122C7F18600749FA9 /* MianNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3218158222B6E1F3009A51D4 /* Audible.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Audible.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3218158522B6E1F3009A51D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3218158722B6E1F3009A51D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3218158722B6E1F3009A51D4 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3218158A22B6E1F3009A51D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3218158D22B6E1F3009A51D4 /* Audible.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Audible.xcdatamodel; sourceTree = "<group>"; };
 		3218158F22B6E1F5009A51D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -30,6 +31,7 @@
 		3218159A22B845A4009A51D4 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		3218159C22BC1BB8009A51D4 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		32D08A5F22C618C900749FA9 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
+		32D08A6122C7F18600749FA9 /* MianNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MianNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +68,9 @@
 				3218159C22BC1BB8009A51D4 /* Page.swift */,
 				32D08A5F22C618C900749FA9 /* LoginCell.swift */,
 				3218159A22B845A4009A51D4 /* PageCell.swift */,
-				3218158722B6E1F3009A51D4 /* ViewController.swift */,
+				3218158722B6E1F3009A51D4 /* LoginController.swift */,
 				3218158922B6E1F3009A51D4 /* Main.storyboard */,
+				32D08A6122C7F18600749FA9 /* MianNavigationController.swift */,
 				3218158F22B6E1F5009A51D4 /* Assets.xcassets */,
 				3218159122B6E1F5009A51D4 /* LaunchScreen.storyboard */,
 				3218159422B6E1F5009A51D4 /* Info.plist */,
@@ -148,11 +151,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3218158E22B6E1F3009A51D4 /* Audible.xcdatamodeld in Sources */,
-				3218158822B6E1F3009A51D4 /* ViewController.swift in Sources */,
+				3218158822B6E1F3009A51D4 /* LoginController.swift in Sources */,
 				3218159B22B845A4009A51D4 /* PageCell.swift in Sources */,
 				3218158622B6E1F3009A51D4 /* AppDelegate.swift in Sources */,
 				3218159D22BC1BB8009A51D4 /* Page.swift in Sources */,
 				32D08A6022C618C900749FA9 /* LoginCell.swift in Sources */,
+				32D08A6222C7F18600749FA9 /* MianNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,7 +25,7 @@ class MianNavigationController: UINavigationController {
     }
     
     func checkLogin() -> Bool {
-        return true
+        return false
     }
     
     @objc func showLoginController(){

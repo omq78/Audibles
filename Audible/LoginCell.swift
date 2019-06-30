@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LoginControllerDelegate: class {
+    func finshLoggedIn()
+}
+
 class LoginCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,15 +49,21 @@ class LoginCell: UICollectionViewCell {
         return tv
     }()
     
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let but = UIButton(type: .system)
         but.setTitle("Log In", for: .normal)
         but.setTitleColor(UIColor.white, for: .normal)
         but.backgroundColor = UIColor.orange
         but.translatesAutoresizingMaskIntoConstraints = false
+        but.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return but
     }()
 
+    weak var delegate: LoginControllerDelegate?
+    @objc func handleLogin(){
+        delegate!.finshLoggedIn()
+    }
+    
     func setCellComponents(){
         
         addSubview(loginImage)

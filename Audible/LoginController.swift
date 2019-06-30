@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class LoginController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LoginControllerDelegate {
 
     lazy var collectionView: UICollectionView = {
         let cvLayout = UICollectionViewFlowLayout()
@@ -168,12 +168,21 @@ class LoginController: UIViewController, UICollectionViewDelegate, UICollectionV
         return pages.count + 1
     }
     
+    func finshLoggedIn(){
+        dismiss(animated: true, completion: nil)
+        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        guard let mainNavigaitonController = rootViewController as? MianNavigationController else {return}
+        mainNavigaitonController.viewControllers = [MainPageController()]
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
      
         if indexPath.row == self.pages.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: loginPageCellID, for: indexPath) as? LoginCell
             
+            cell?.delegate = self
             return cell!
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as? PageCell

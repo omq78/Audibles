@@ -17,6 +17,8 @@
 		3218159D22BC1BB8009A51D4 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3218159C22BC1BB8009A51D4 /* Page.swift */; };
 		32D08A6022C618C900749FA9 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D08A5F22C618C900749FA9 /* LoginCell.swift */; };
 		32D08A6222C7F18600749FA9 /* MianNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D08A6122C7F18600749FA9 /* MianNavigationController.swift */; };
+		32D08A6622C9537100749FA9 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D08A6522C9537100749FA9 /* MainPageController.swift */; };
+		32D08A6822C9546B00749FA9 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D08A6722C9546B00749FA9 /* UserDefaultsExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		3218159C22BC1BB8009A51D4 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		32D08A5F22C618C900749FA9 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		32D08A6122C7F18600749FA9 /* MianNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MianNavigationController.swift; sourceTree = "<group>"; };
+		32D08A6522C9537100749FA9 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
+		32D08A6722C9546B00749FA9 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 			children = (
 				3218158522B6E1F3009A51D4 /* AppDelegate.swift */,
 				3218159C22BC1BB8009A51D4 /* Page.swift */,
+				32D08A6722C9546B00749FA9 /* UserDefaultsExtension.swift */,
 				32D08A5F22C618C900749FA9 /* LoginCell.swift */,
 				3218159A22B845A4009A51D4 /* PageCell.swift */,
 				3218158722B6E1F3009A51D4 /* LoginController.swift */,
@@ -73,6 +78,7 @@
 				32D08A6122C7F18600749FA9 /* MianNavigationController.swift */,
 				3218158F22B6E1F5009A51D4 /* Assets.xcassets */,
 				3218159122B6E1F5009A51D4 /* LaunchScreen.storyboard */,
+				32D08A6522C9537100749FA9 /* MainPageController.swift */,
 				3218159422B6E1F5009A51D4 /* Info.plist */,
 				3218158C22B6E1F3009A51D4 /* Audible.xcdatamodeld */,
 			);
@@ -151,11 +157,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3218158E22B6E1F3009A51D4 /* Audible.xcdatamodeld in Sources */,
+				32D08A6622C9537100749FA9 /* MainPageController.swift in Sources */,
 				3218158822B6E1F3009A51D4 /* LoginController.swift in Sources */,
 				3218159B22B845A4009A51D4 /* PageCell.swift in Sources */,
 				3218158622B6E1F3009A51D4 /* AppDelegate.swift in Sources */,
 				3218159D22BC1BB8009A51D4 /* Page.swift in Sources */,
 				32D08A6022C618C900749FA9 /* LoginCell.swift in Sources */,
+				32D08A6822C9546B00749FA9 /* UserDefaultsExtension.swift in Sources */,
 				32D08A6222C7F18600749FA9 /* MianNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,7 +25,7 @@ class MianNavigationController: UINavigationController {
     }
     
     func checkLogin() -> Bool {
-        return false
+        return UserDefaults.standard.getLoggedIn()
     }
     
     @objc func showLoginController(){
@@ -37,26 +37,3 @@ class MianNavigationController: UINavigationController {
 }
 
 
-class MainPageController: UIViewController {
-    let mainImageView: UIImageView = {
-        let imv = UIImageView()
-        imv.translatesAutoresizingMaskIntoConstraints = false
-        imv.image = UIImage(named: "home")
-        return imv
-    }()
-    
-    override func viewDidLoad() {
-         super.viewDidLoad()
-        navigationItem.title = "we are logged in"
-        setViewComponents()
-    }
-    
-    func setViewComponents() {
-        self.view.addSubview(mainImageView)
-        
-        mainImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
-        mainImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        mainImageView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        mainImageView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    }
-}

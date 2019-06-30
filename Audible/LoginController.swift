@@ -169,6 +169,7 @@ class LoginController: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     
     func finshLoggedIn(){
+        UserDefaults.standard.setLoggedIn(value: true)
         dismiss(animated: true, completion: nil)
         let rootViewController = UIApplication.shared.keyWindow?.rootViewController
         guard let mainNavigaitonController = rootViewController as? MianNavigationController else {return}
